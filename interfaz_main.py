@@ -3,8 +3,8 @@ from tkinter import ttk
 from tkinter import messagebox
 import sqlite3
 
-micursor = sqlite3.connect("ProyectoU2")
-micursor = micursor.cursor()
+Miconexion = sqlite3.connect("ProyectoU2")
+micursor = Miconexion.cursor()
 
 #micursor.execute("CREATE TABLE USUARIOS (ID INTEGER PRIMARY KEY AUTOINCREMENT, NOMBRE VARCHAR(20), CONTRASEÑA INTEGER, CORREO VARCHAR(15), EDAD INTEGER )")
 
@@ -27,7 +27,7 @@ class Usuario():
     
     def desconectar(self):
         self.conectado= False
-        print("tu secion ha terminado con exito, dale reintentar para volver a ingresar ")
+        print("tu sesion ha terminado con exito, dale reintentar para volver a ingresar ")
 
 
 class registro():
@@ -38,7 +38,10 @@ class registro():
         self.edad = edad
     
     def registro(self):
-        micursor.execute("INSERT INTO USUARIOS VALUES(NULL,{},{},{},{})".format(self.nombre,self.contraseña,self.correo,self.edad))
+        micursor.execute("INSERT INTO USUARIOS VALUES(NULL,'{}','{}','{}','{}')".format(self.nombre,self.contraseña,self.correo,self.edad))      
+        Miconexion.commit()
 
 
 
+registro1= registro("Juan",12312313,"jmedinaguunal.edu.co",13)
+registro1.registro()
